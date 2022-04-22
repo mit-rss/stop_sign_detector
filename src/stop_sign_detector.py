@@ -11,8 +11,7 @@ class StopSignDetector:
 
   def predict(self, img):
     results = self.model(img)
-    results_df = results.pandas().xyxy[0]
-
+    df = results.pandas().xyxy[0]
     confidences = df[df['confidence'] > self.threshold]
     stop_signs = confidences[confidences['name'] == self.label]
 

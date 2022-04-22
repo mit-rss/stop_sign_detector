@@ -42,7 +42,7 @@ class StopSignDetector:
         self.s.sendall(struct.pack(">L", size) + data)
 
         # Wait for the result
-        data = self.s.recv(1024)
+        data = self.s.recv(4096).decode()
 
         # Publish the result as a ROS message
         print(data)
@@ -57,5 +57,5 @@ if __name__ == '__main__':
         ssd = StopSignDetector(s)
 
         while True:
-            ssd.file_detect('/Users/theia/Pictures/li_sunrise.jpg')
+            ssd.file_detect('stop_sign.jpg')
         # rospy.spin()
