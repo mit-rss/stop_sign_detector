@@ -39,10 +39,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             frame_data = data[:msg_size]
             data = data[msg_size:]
             frame = pickle.loads(frame_data, fix_imports=True, encoding="bytes")
-            print("got image")
             bgr_img = cv2.imdecode(frame, cv2.IMREAD_COLOR)
             rgb_img = cv2.cvtColor(bgr_img, cv2.COLOR_BGR2RGB)
-            print("decoded")
 
             # Perform prediction and send the bounding box back
             conn.sendall(b'image received')

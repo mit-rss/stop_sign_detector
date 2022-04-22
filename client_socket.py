@@ -24,9 +24,14 @@ class StopSignDetector:
         self.img_detect(np_img[:,:,:-1])
 
     def file_detect(self, path):
-        self.img_detect(cv2.imread(path, cv2.IMREAD_COLOR))
+        img = cv2.imread(path, cv2.IMREAD_COLOR)
+        self.img_detect(img)
 
     def img_detect(self, img):
+        # Resize the image so the max side length is 640
+        aspect_ratio = img.shape[0]/img.shape[1]
+        img = cv2.resize(img, (640, int(640*aspect_ratio)))
+
         # Convert the data to a JPG so its smaller
         _, frame = cv2.imencode('.jpg', img, ENCODE_PARAM)
 
