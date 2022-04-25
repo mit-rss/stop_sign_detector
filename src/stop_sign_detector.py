@@ -1,7 +1,6 @@
 import os
 import torch
 import numpy as np
-from PIL import Image, ImageDraw
 
 class StopSignDetector:
   def __init__(self, threshold=0.5, label='stop sign'):
