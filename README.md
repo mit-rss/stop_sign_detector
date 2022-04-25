@@ -32,4 +32,4 @@ If you need more space, delete the following:
     /usr/src/tensorrt/data/mnist
     /usr/src/tensorrt/python/data/resnet50
 
-If you still don't have enough space run `ncdu /` to find large files. ~don't delete your kernel pls~
+If you still don't have enough space run `ncdu /` to find large files. \~don't delete your kernel pls\~
