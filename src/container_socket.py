@@ -4,6 +4,7 @@ import socket
 import struct
 import pickle
 import cv2
+import json
 from stop_sign_detector import StopSignDetector
 
 print("Loading model...")
@@ -42,7 +43,6 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             bgr_img = cv2.imdecode(frame, cv2.IMREAD_COLOR)
             rgb_img = cv2.cvtColor(bgr_img, cv2.COLOR_BGR2RGB)
 
-            bbox = stop_sign_detector.predict(rgb_img)
-
             # Perform prediction and send the bounding box back
-            conn.sendall(str(bbox).encode())
+            bbox = stop_sign_detector.predict(rgb_img)
+            conn.sendall(json.dumps(bbox).encode())
