@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python2
 
 import socket
 import pickle
@@ -53,12 +53,12 @@ class StopSignDetector:
         print(bbox)
 
 if __name__ == '__main__':
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.connect((HOST, PORT))
-        print("Connected to socket!")
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect((HOST, PORT))
+    print("Connected to socket!")
 
-        # rospy.init_node("stop_sign_detector")
-        ssd = StopSignDetector(s)
-        while True:
-            ssd.file_detect('stop_sign.jpg')
-        # rospy.spin()
+    # rospy.init_node("stop_sign_detector")
+    ssd = StopSignDetector(s)
+    while True:
+        ssd.file_detect('stop_sign.jpg')
+    # rospy.spin()
