@@ -8,17 +8,23 @@ SSH into your car then clone this repo and build it. This can take a little whil
     cd stop_sign_detector
     sudo docker build -t stop_sign_detector .
 
-Once it's built, start the detector:
+Once it's built, first run a `roscore` one terminal then start the detector:
 
     sudo docker run --rm -p 6141:6141 -ti stop_sign_detector
 
-Once its running, launch your ZED camera and start the bridge to send ROS images to the detector:
+Once the detector says "socket open and listening" run the bridge:
 
     ./bridge.py
+    
+They should both say "connected". Note that if you kill the bridge you'll also need to restart the docker container.
+    
+Then launch your ZED camera:
 
+    roslaunch zed_wrapper zed.launch
+    
 Point your camera towards a stop sign (a screenshot works).
-If you visualize the `stop_sign_debug` topic in `rviz`, you'll see it bounded by a blue rectangle.
-The coordinates of that rectangle, (xmin, ymin, xmax, ymax), are published to `stop_sign_bbox`
+If you visualize the `stop_sign_debug` topic in `rviz`, you'll see your camera feed and the stop sign bounded by a blue rectangle.
+The coordinates of that rectangle, (xmin, ymin, xmax, ymax), are published to `stop_sign_bbox` --- subscribe to this topic to build control logic around the detector!
 
 ## Freeing Space
 
